@@ -1,4 +1,3 @@
-Below is a professional **README.md** for your GitHub repository. It is designed for a **5th Semester Full Stack Development-II (FSD-II)** course at **Chandigarh University** and follows the recommended structure of keeping all experiments in a single repository with separate folders. 
 
 ---
 
