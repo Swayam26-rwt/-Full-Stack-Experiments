@@ -1,0 +1,100 @@
+
+* {
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background-color: #f2f4f7;
+  margin: 0;
+  padding: 20px;
+}
+
+
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+h1 {
+  text-align: center;
+  color: #222;
+}
+
+
+.card {
+  background: white;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 5px;
+}
+
+select,
+textarea {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+
+.button-row {
+  display: flex;
+  gap: 10px;
+}
+
+button {
+  background-color: #4a63e7;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+button:hover {
+  background-color: #3a4fc9;
+}
+
+
+button:disabled {
+  background-color: #aaa;
+  cursor: not-allowed;
+}
+
+
+.success-text {
+  color: green;
+  font-weight: bold;
+}
+
+
+.error-text {
+  color: red;
+  font-weight: bold;
+}
+
+
+.draft-item {
+  border: 1px solid #eee;
+  border-radius: 6px;
+  padding: 10px;
+  margin-bottom: 10px;
+  background: #fafafa;
+}
+
+
+ul {
+  padding-left: 20px;
+  font-size: 14px;
+}
