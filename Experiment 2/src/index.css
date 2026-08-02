@@ -1,0 +1,141 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  background: #f4f6f9;
+  color: #333;
+}
+
+.container {
+  width: 90%;
+  max-width: 1100px;
+  margin: 30px auto;
+}
+
+h1 {
+  text-align: center;
+  color: #0d47a1;
+  margin-bottom: 10px;
+}
+
+h2 {
+  margin: 20px 0 15px;
+  color: #1976d2;
+}
+
+h3 {
+  color: green;
+  margin-bottom: 15px;
+}
+
+/* Form */
+.form {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 25px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form input,
+.form select {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #bbb;
+  border-radius: 6px;
+  font-size: 15px;
+}
+
+button {
+  background: #1976d2;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  margin-top: 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 15px;
+  transition: 0.3s;
+}
+
+button:hover {
+  background: #0d47a1;
+}
+
+/* Posts Grid */
+.posts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+/* Card */
+.card {
+  background: white;
+  padding: 18px;
+  border-radius: 10px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card h3 {
+  color: #1565c0;
+  margin-bottom: 10px;
+}
+
+.card p {
+  margin: 8px 0;
+}
+
+.card button {
+  margin-top: 15px;
+  width: 100%;
+  background: #e53935;
+}
+
+.card button:hover {
+  background: #b71c1c;
+}
+
+/* Analytics */
+.analytics {
+  margin-top: 30px;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+}
+
+.analytics p {
+  margin: 10px 0;
+  font-size: 16px;
+}
+
+.analytics ul {
+  margin-top: 10px;
+  padding-left: 20px;
+}
+
+.analytics li {
+  margin: 6px 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .container {
+    width: 95%;
+  }
+
+  h1 {
+    font-size: 28px;
+  }
+
+  .posts {
+    grid-template-columns: 1fr;
+  }
+}
