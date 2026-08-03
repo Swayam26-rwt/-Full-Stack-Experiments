@@ -85,9 +85,7 @@ function App() {
 
   return (
     <div className="container">
-      <h1>Redux Content Management System</h1>
-
-      <h2>Experiment 2</h2>
+      <h1>Redux Content Management System-swayam</h1>
 
       {loading && <h3>Loading Posts...</h3>}
 
