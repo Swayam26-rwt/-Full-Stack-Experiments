@@ -82,7 +82,7 @@ Each experiment is maintained in its own folder for better organization and vers
 
 | Experiment | Topic | Description | Live Demo | Status |
 | --- | --- | --- | --- | --- |
-| Experiment 1 | React Fundamentals | Post Composer & Draft Manager built with React + Vite | — | ✅ |
+| Experiment 1 | React Fundamentals | Post Composer & Draft Manager built with React + Vite | [🚀 Live Demo](https://post-composer-draft-manager-swayam.vercel.app) | ✅ |
 | Experiment 2 | State Management — Redux | Social media content manager with Redux Toolkit, async thunks, and memoised selectors | [🚀 Live Demo](https://fsd-exp2-redux-content-manager.vercel.app) | ✅ |
 | Experiment 3 | Authentication & RBAC | Role-based access control with JWT, Axios interceptors, and protected React Router routes | [🚀 Live Demo](https://fsd-exp3-rbac-jwt.vercel.app) | ✅ |
 | Experiment 4 | React Optimization & Testing | Interactive calendar with React.memo/useMemo/useCallback, MSW mock API, and Vitest test suite | [🚀 Live Demo](https://fsd-exp4-calendar.vercel.app) | ✅ |
