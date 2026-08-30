@@ -1,59 +1,16 @@
-# Experiment 2 — Redux Content Manager
+# React + Vite
 
-A React + Vite application demonstrating state management using **Redux Toolkit** and **Reselect**.
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-## 📌 Objective
+Currently, two official plugins are available:
 
-Build a content management interface that uses Redux for centralized state, showcasing:
-- Store setup with `@reduxjs/toolkit`
-- Slice-based reducers and actions
-- Memoized selectors with `reselect`
-- React-Redux integration via `useSelector` and `useDispatch`
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
 
-## 🛠️ Tech Stack
+## React Compiler
 
-| Technology | Purpose |
-|---|---|
-| React 18 | UI Library |
-| Vite | Build Tool & Dev Server |
-| Redux Toolkit | State Management |
-| React-Redux | React bindings for Redux |
-| Reselect | Memoized Selectors |
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-## 📁 Project Structure
+## Expanding the ESLint configuration
 
-```
-Experiment 2/
-├── public/              # Static assets
-├── src/
-│   ├── App.jsx          # Root component
-│   ├── App.css          # Component styles
-│   ├── redux.js         # Redux store, slices & selectors
-│   ├── main.jsx         # Entry point with Redux Provider
-│   └── index.css        # Global styles
-├── index.html
-├── vite.config.js
-└── package.json
-```
-
-## 🚀 Getting Started
-
-```bash
-# Navigate into the project
-cd "Experiment 2"
-
-# Install dependencies
-npm install
-
-# Start the development server
-npm run dev
-```
-
-The app will be available at `http://localhost:5173`.
-
-## 🔑 Key Concepts
-
-- **Redux Store** — Single source of truth for application state
-- **Slices** — Modular state with co-located reducers and actions
-- **Selectors** — Efficiently derive data from state with memoization
-- **Provider** — Makes the store available to the entire React tree
+If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
