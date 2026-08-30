@@ -38,72 +38,60 @@ Each experiment is maintained in its own folder for better organization and vers
 
 ### Frontend
 
-* React.js
-* HTML5
-* CSS3
-* JavaScript (ES6+)
+* React.js (v19)
+* HTML5, CSS3
+* JavaScript (ES2022+)
+* Vite (build tool)
 
-### Backend
+### State Management & Tooling
 
-* Spring Boot
-* Java
-* REST APIs
+* Redux Toolkit + Reselect
+* React Router DOM v7
+* Axios
+* MSW (Mock Service Worker)
 
-### Database
+### Testing
 
-* MySQL
-* MongoDB (where applicable)
+* Vitest
+* React Testing Library
 
 ### Other Tools
 
-* Git
-* GitHub
-* Postman
+* Git & GitHub
+* Vercel (deployment)
 * VS Code
-* IntelliJ IDEA
-* Maven
 
 ---
 
 # 📂 Repository Structure
 
 ```text
-FSD-II/
+-Full-Stack-Experiments/
 │
-├── exp-1/
-├── exp-2/
-├── exp-3/
-├── exp-4/
-├── exp-5/
-├── exp-6/
-├── exp-7/
-├── exp-8/
-├── exp-9/
-├── exp-10/
+├── Experiment 1/    — Post Composer & Draft Manager (React + Vite)
+├── Experiment 2/    — Redux Content Manager (React + Redux Toolkit + Reselect)
+├── Experiment 3/    — RBAC & JWT Route Protection (React + React Router v7)
+├── Experiment 4/    — Interactive Calendar with Optimization & Testing
 │
 └── README.md
 ```
-
-This structure follows the recommended approach of maintaining **one repository with separate folders for each experiment**. 
 
 ---
 
 # 📚 Experiments
 
-| Experiment    | Topic                     | Status |
-| ------------- | ------------------------- | ------ |
-| Experiment 1  | React Fundamentals        | ✅      |
-| Experiment 2  | Components & Props        | ⏳      |
-| Experiment 3  | State Management          | ⏳      |
-| Experiment 4  | Forms & Validation        | ⏳      |
-| Experiment 5  | Routing                   | ⏳      |
-| Experiment 6  | Backend Integration       | ⏳      |
-| Experiment 7  | REST APIs                 | ⏳      |
-| Experiment 8  | Authentication & Security | ⏳      |
-| Experiment 9  | Performance Optimization  | ⏳      |
-| Experiment 10 | Final Integrated Project  | ⏳      |
-
-> *The table will be updated as experiments are completed.*
+| Experiment | Topic | Description | Live Demo | Status |
+| --- | --- | --- | --- | --- |
+| Experiment 1 | React Fundamentals | Post Composer & Draft Manager built with React + Vite | — | ✅ |
+| Experiment 2 | State Management — Redux | Social media content manager with Redux Toolkit, async thunks, and memoised selectors | [🚀 Live Demo](https://fsd-exp2-redux-content-manager.vercel.app) | ✅ |
+| Experiment 3 | Authentication & RBAC | Role-based access control with JWT, Axios interceptors, and protected React Router routes | [🚀 Live Demo](https://fsd-exp3-rbac-jwt.vercel.app) | ✅ |
+| Experiment 4 | React Optimization & Testing | Interactive calendar with React.memo/useMemo/useCallback, MSW mock API, and Vitest test suite | [🚀 Live Demo](https://fsd-exp4-calendar.vercel.app) | ✅ |
+| Experiment 5 | Routing | — | — | ⏳ |
+| Experiment 6 | Backend Integration | — | — | ⏳ |
+| Experiment 7 | REST APIs | — | — | ⏳ |
+| Experiment 8 | Authentication & Security | — | — | ⏳ |
+| Experiment 9 | Performance Optimization | — | — | ⏳ |
+| Experiment 10 | Final Integrated Project | — | — | ⏳ |
 
 ---
 
@@ -122,24 +110,18 @@ By completing this course, I will be able to:
 
 ---
 
-## 💻 How to Run
+## 💻 How to Run Any Experiment
 
 ### Clone Repository
 
 ```bash
-git clone https://github.com/your-username/FSD-II.git
+git clone https://github.com/Swayam26-rwt/-Full-Stack-Experiments.git
 ```
 
-### Navigate
+### Navigate to an Experiment
 
 ```bash
-cd FSD-II
-```
-
-### Open Experiment
-
-```bash
-cd exp-1
+cd "-Full-Stack-Experiments/Experiment 2"
 ```
 
 ### Install Dependencies
@@ -176,6 +158,8 @@ npm run dev
 
 **Specialization:** Artificial Intelligence & Machine Learning (AIML)
 
+**GitHub:** [github.com/Swayam26-rwt](https://github.com/Swayam26-rwt)
+
 ---
 
 ## 📌 Repository Guidelines
@@ -187,23 +171,6 @@ npm run dev
 * Keep documentation updated.
 * Push changes after completing each experiment.
 
-These guidelines align with the recommended GitHub workflow for the course. 
-
----
-
-## 📈 Skills Covered
-
-* React.js
-* Spring Boot
-* Java
-* REST APIs
-* Git & GitHub
-* Database Integration
-* Authentication
-* Performance Optimization
-* Software Architecture
-* Clean Code Principles
-
 ---
 
 ## 📄 License
@@ -214,4 +181,4 @@ This repository is maintained for **educational and academic purposes** as part 
 
 # ⭐ Thank You
 
-If you find this repository useful, feel free to ⭐ star it and explore the experiments as they are added throughout the semester.
+If you find this repository useful, feel free to ⭐ star it and explore the experiments.
