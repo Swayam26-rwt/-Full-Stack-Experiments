@@ -55,6 +55,12 @@ Each experiment is maintained in its own folder for better organization and vers
 * Vitest
 * React Testing Library
 
+### Backend & Server
+
+* Node.js
+* Express.js (v5)
+* REST API Architecture
+
 ### Other Tools
 
 * Git & GitHub
@@ -72,6 +78,7 @@ Each experiment is maintained in its own folder for better organization and vers
 ├── Experiment 2/    — Redux Content Manager (React + Redux Toolkit + Reselect)
 ├── Experiment 3/    — RBAC & JWT Route Protection (React + React Router v7)
 ├── Experiment 4/    — Interactive Calendar with Optimization & Testing
+├── Experiment 5/    — REST API Design & Exception Handling (Node.js + Express)
 │
 └── README.md
 ```
@@ -86,7 +93,7 @@ Each experiment is maintained in its own folder for better organization and vers
 | Experiment 2 | State Management — Redux | Social media content manager with Redux Toolkit, async thunks, and memoised selectors | [🚀 Live Demo](https://fsd-exp2-redux-content-manager.vercel.app) | ✅ |
 | Experiment 3 | Authentication & RBAC | Role-based access control with JWT, Axios interceptors, and protected React Router routes | [🚀 Live Demo](https://fsd-exp3-rbac-jwt.vercel.app) | ✅ |
 | Experiment 4 | React Optimization & Testing | Interactive calendar with React.memo/useMemo/useCallback, MSW mock API, and Vitest test suite | [🚀 Live Demo](https://fsd-exp4-calendar.vercel.app) | ✅ |
-| Experiment 5 | Routing | — | — | ⏳ |
+| Experiment 5 | REST API Design & Exception Handling | Full-stack Express.js REST API with CRUD, request validation, correlation ID middleware, centralized error handling, and scheduled tasks | [🚀 Live Demo](https://fsd-exp5-rest-api.vercel.app) | ✅ |
 | Experiment 6 | Backend Integration | — | — | ⏳ |
 | Experiment 7 | REST APIs | — | — | ⏳ |
 | Experiment 8 | Authentication & Security | — | — | ⏳ |

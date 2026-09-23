@@ -1,0 +1,14 @@
+{
+  "name": "experiment5-fullstack",
+  "version": "1.0.0",
+  "description": "Experiment 5 REST API with a small JavaScript frontend",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^5.1.0"
+  }
+}

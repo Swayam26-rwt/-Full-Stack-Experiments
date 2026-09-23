@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Experiment 5 - REST API</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div>
+      <h1>Experiment 5</h1>
+      <p>REST API Design & Exception Handling</p>
+    </div>
+    <span id="apiStatus" class="status">Checking API...</span>
+  </header>
+
+  <main>
+    <section class="card">
+      <h2>Create / Update Post</h2>
+      <input type="hidden" id="postId">
+
+      <label for="content">Post Content</label>
+      <textarea id="content" maxlength="280"
+        placeholder="Enter post content (max 280 characters)"></textarea>
+
+      <div class="row between">
+        <small><span id="count">0</span>/280 characters</small>
+        <div>
+          <button class="secondary" onclick="clearForm()">Clear</button>
+          <button onclick="savePost()">Save Post</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="row between">
+        <h2>Posts</h2>
+        <button class="secondary" onclick="loadPosts()">Refresh</button>
+      </div>
+      <div id="posts"></div>
+    </section>
+
+    <section class="card">
+      <h2>Schedule a Task</h2>
+      <label for="task">Task</label>
+      <input id="task" maxlength="280" placeholder="Example: Run experiment task">
+
+      <label for="delay">Delay (seconds)</label>
+      <input id="delay" type="number" min="1" value="5">
+
+      <button onclick="scheduleTask()">Schedule Task</button>
+      <div id="scheduleResult" class="result"></div>
+    </section>
+
+    <section class="card">
+      <h2>API / Experiment Features</h2>
+      <div class="features">
+        <span>✓ CRUD API</span>
+        <span>✓ Validation</span>
+        <span>✓ Standard Response</span>
+        <span>✓ CORS</span>
+        <span>✓ Logging</span>
+        <span>✓ Exception Handling</span>
+        <span>✓ Correlation ID</span>
+        <span>✓ Scheduling</span>
+      </div>
+      <p class="hint">
+        Open the terminal running Node.js to see request logs and correlation IDs.
+      </p>
+    </section>
+  </main>
+
+  <div id="toast"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>

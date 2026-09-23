@@ -37,7 +37,7 @@ function App() {
 
   function addLog(message) {
     const time = new Date().toLocaleTimeString();
-    setLogs((prevLogs) => [`${message} - ${time}`, ...prevLogs].slice(0, 10));
+    setLogs((prevLogs) => [`${message} - ${time}`, ...prevLogs].slice());
   }
 
 
