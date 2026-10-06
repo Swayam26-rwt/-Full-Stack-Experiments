@@ -1,0 +1,226 @@
+{
+  "info": {
+    "_postman_id": "c1f7b892-934d-4e92-bbf6-8a9d1e4c7b89",
+    "name": "Experiment 5 - Spring Boot Banking REST API",
+    "description": "Comprehensive Postman test collection for Experiment 5: Spring Boot REST API Design, Validation, Logging, Correlation IDs, and Global Exception Handling.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "1. Create Account (Swayam)",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"accountNumber\": \"1234567890\",\n    \"holderName\": \"Swayam\",\n    \"accountType\": \"SAVINGS\",\n    \"balance\": 5000\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/accounts",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["api", "accounts"]
+        }
+      }
+    },
+    {
+      "name": "2. Get All Accounts",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/accounts",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["api", "accounts"]
+        }
+      }
+    },
+    {
+      "name": "3. Get Account by ID (ID: 1)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/accounts/1",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["api", "accounts", "1"]
+        }
+      }
+    },
+    {
+      "name": "4. Update Account (ID: 1)",
+      "request": {
+        "method": "PUT",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"accountNumber\": \"1234567890\",\n    \"holderName\": \"Swayam Rawat\",\n    \"accountType\": \"SAVINGS\",\n    \"balance\": 7000\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/accounts/1",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["api", "accounts", "1"]
+        }
+      }
+    },
+    {
+      "name": "5. Deposit Money (ID: 1, Amount: 1000)",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"amount\": 1000\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/accounts/1/deposit",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["api", "accounts", "1", "deposit"]
+        }
+      }
+    },
+    {
+      "name": "6. Withdraw Money (ID: 1, Amount: 500)",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"amount\": 500\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/accounts/1/withdraw",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["api", "accounts", "1", "withdraw"]
+        }
+      }
+    },
+    {
+      "name": "7. Create Second Account (Rahul)",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"accountNumber\": \"9876543210\",\n    \"holderName\": \"Rahul\",\n    \"accountType\": \"SAVINGS\",\n    \"balance\": 3000\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/accounts",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["api", "accounts"]
+        }
+      }
+    },
+    {
+      "name": "8. Transfer Money (1 to 2, Amount: 1000)",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"fromAccountId\": 1,\n    \"toAccountId\": 2,\n    \"amount\": 1000\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/accounts/transfer",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["api", "accounts", "transfer"]
+        }
+      }
+    },
+    {
+      "name": "9. Delete Account (ID: 2)",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/accounts/2",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["api", "accounts", "2"]
+        }
+      }
+    },
+    {
+      "name": "10. Validation Failure (400 Bad Request)",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"accountNumber\": \"123\",\n    \"holderName\": \"\",\n    \"accountType\": \"INVALID\",\n    \"balance\": -100\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/accounts",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["api", "accounts"]
+        }
+      }
+    },
+    {
+      "name": "11. Exception Handler Not Found (404 Not Found)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/accounts/999",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["api", "accounts", "999"]
+        }
+      }
+    },
+    {
+      "name": "12. Insufficient Balance (400 Bad Request)",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"amount\": 100000\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/accounts/1/withdraw",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["api", "accounts", "1", "withdraw"]
+        }
+      }
+    }
+  ]
+}

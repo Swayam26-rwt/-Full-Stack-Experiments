@@ -1,4 +1,16 @@
-node_modules
+# Maven & Java
+backend/target/
+**/target/
+*.class
+
+# Node & Vite
+frontend/node_modules/
+**/node_modules/
+frontend/dist/
+**/dist/
+
+# OS & Logs
 .DS_Store
 *.log
-.vercel
+.env
+.vercel/

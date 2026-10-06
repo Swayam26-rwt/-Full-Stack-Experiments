@@ -1,13 +1,13 @@
-
 ---
 
 # 🚀 Full Stack Development - II (FSD-II)
 
-> **Chandigarh University**
-> **Course:** Full Stack Development - II (24CSP-337)
-> **Semester:** 5th Semester
-> **Student:** **Swayam Rawat**
-> **Department:** Computer Science Engineering (AIML)
+> **Chandigarh University**  
+> **Course:** Full Stack Development - II (24CSP-337)  
+> **Semester:** 5th Semester  
+> **Student:** **Swayam Rawat**  
+> **Department:** Computer Science Engineering (AIML)  
+> **GitHub:** [github.com/Swayam26-rwt](https://github.com/Swayam26-rwt)
 
 ---
 
@@ -25,11 +25,11 @@ Each experiment is maintained in its own folder for better organization and vers
 
 * Learn modern Full Stack Development
 * Build scalable web applications
-* Develop REST APIs
+* Develop REST APIs with clean layered architectures
 * Understand frontend and backend integration
 * Implement authentication & authorization
-* Apply clean coding practices
-* Improve software architecture skills
+* Apply clean coding practices & data validation
+* Improve software architecture skills & API testing
 * Gain industry-oriented development experience
 
 ---
@@ -37,35 +37,35 @@ Each experiment is maintained in its own folder for better organization and vers
 ## 🛠️ Technologies Used
 
 ### Frontend
-
 * React.js (v19)
-* HTML5, CSS3
-* JavaScript (ES2022+)
-* Vite (build tool)
+* HTML5, CSS3, Modern Glassmorphism & Dark Themes
+* JavaScript (ES2022+) & JSX
+* Vite (high-performance build tool)
 
 ### State Management & Tooling
-
 * Redux Toolkit + Reselect
 * React Router DOM v7
-* Axios
+* Axios & Interceptors
 * MSW (Mock Service Worker)
 
-### Testing
+### Testing & API Quality
+* Postman (Comprehensive API Test Collections)
+* Vitest & React Testing Library
+* Spring Boot Test Suite
 
-* Vitest
-* React Testing Library
-
-### Backend & Server
-
-* Node.js
-* Express.js (v5)
-* REST API Architecture
+### Backend & Server Runtimes
+* Java 17+ & Spring Boot 3 (v3.5.5)
+* Layered Architecture (`Controller → Service → Repository`)
+* Jakarta Bean Validation API
+* Centralized Global Exception Handling (`@RestControllerAdvice`)
+* Logging Filters (`OncePerRequestFilter`) & Latency Tracing
+* SLF4J MDC Distributed Tracing (`X-Correlation-ID`)
+* Node.js & Express.js (v5)
 
 ### Other Tools
-
 * Git & GitHub
-* Vercel (deployment)
-* VS Code
+* Vercel (Cloud Deployment)
+* VS Code & Apache Maven
 
 ---
 
@@ -78,14 +78,18 @@ Each experiment is maintained in its own folder for better organization and vers
 ├── Experiment 2/    — Redux Content Manager (React + Redux Toolkit + Reselect)
 ├── Experiment 3/    — RBAC & JWT Route Protection (React + React Router v7)
 ├── Experiment 4/    — Interactive Calendar with Optimization & Testing
-├── Experiment 5/    — REST API Design & Exception Handling (Node.js + Express)
+├── Experiment 5/    — Spring Boot REST API Design & Exception Handling (Spring Boot + React Vite)
+│   ├── backend/     — Spring Boot Layered REST API (Controller, Service, Repository, DTOs, Exception Handlers)
+│   ├── frontend/    — React + Vite Banking Management System UI
+│   ├── postman/     — Postman Collection (12 Verified Endpoints)
+│   └── screenshots/ — Complete visual verification evidence (Postman + Terminal + UI)
 │
 └── README.md
 ```
 
 ---
 
-# 📚 Experiments
+# 📚 Experiments Summary
 
 | Experiment | Topic | Description | Live Demo | Status |
 | --- | --- | --- | --- | --- |
@@ -93,7 +97,7 @@ Each experiment is maintained in its own folder for better organization and vers
 | Experiment 2 | State Management — Redux | Social media content manager with Redux Toolkit, async thunks, and memoised selectors | [🚀 Live Demo](https://fsd-exp2-redux-content-manager.vercel.app) | ✅ |
 | Experiment 3 | Authentication & RBAC | Role-based access control with JWT, Axios interceptors, and protected React Router routes | [🚀 Live Demo](https://fsd-exp3-rbac-jwt.vercel.app) | ✅ |
 | Experiment 4 | React Optimization & Testing | Interactive calendar with React.memo/useMemo/useCallback, MSW mock API, and Vitest test suite | [🚀 Live Demo](https://fsd-exp4-calendar.vercel.app) | ✅ |
-| Experiment 5 | REST API Design & Exception Handling | Full-stack Express.js REST API with CRUD, request validation, correlation ID middleware, centralized error handling, and scheduled tasks | [🚀 Live Demo](https://fsd-exp5-rest-api.vercel.app) | ✅ |
+| Experiment 5 | Spring Boot REST API & Exception Handling | Enterprise Banking REST API with Spring Boot layered architecture (Controller-Service-Repository), Jakarta Bean Validation, centralized `@RestControllerAdvice`, `OncePerRequestFilter` logging, `X-Correlation-ID` tracing, Postman test suite, and React + Vite frontend | [🚀 Live Demo](https://fsd-exp5-rest-api.vercel.app) | ✅ |
 | Experiment 6 | Backend Integration | — | — | ⏳ |
 | Experiment 7 | REST APIs | — | — | ⏳ |
 | Experiment 8 | Authentication & Security | — | — | ⏳ |
@@ -102,18 +106,32 @@ Each experiment is maintained in its own folder for better organization and vers
 
 ---
 
+## 🌐 Live Deployments & Demonstrations
+
+All completed laboratory experiments are deployed and accessible via cloud hosting for live interactive demonstrations:
+
+* **Experiment 1 (Post Composer):** [https://post-composer-draft-manager-swayam.vercel.app](https://post-composer-draft-manager-swayam.vercel.app)
+* **Experiment 2 (Redux Content Manager):** [https://fsd-exp2-redux-content-manager.vercel.app](https://fsd-exp2-redux-content-manager.vercel.app)
+* **Experiment 3 (RBAC & Protected Routes):** [https://fsd-exp3-rbac-jwt.vercel.app](https://fsd-exp3-rbac-jwt.vercel.app)
+* **Experiment 4 (Optimized Calendar):** [https://fsd-exp4-calendar.vercel.app](https://fsd-exp4-calendar.vercel.app)
+* **Experiment 5 (Spring Boot Banking REST API + React Vite):** [https://fsd-exp5-rest-api.vercel.app](https://fsd-exp5-rest-api.vercel.app)
+
+---
+
 ## 📌 Learning Outcomes
 
 By completing this course, I will be able to:
 
-* Design Full Stack Applications
-* Develop Responsive User Interfaces
-* Build RESTful APIs
-* Integrate Frontend with Backend
-* Manage Databases Efficiently
-* Implement Authentication using JWT
-* Follow Industry Coding Standards
-* Develop Production-Ready Applications
+* Design and structure enterprise Full Stack Applications
+* Develop Responsive User Interfaces using React and Vite
+* Build RESTful APIs adhering to clean layered architecture principles
+* Enforce server-side data integrity using Jakarta Bean Validation
+* Implement centralized exception handling without leaking stack traces
+* Track distributed requests across tiers using correlation IDs (`X-Correlation-ID`)
+* Monitor API latency and HTTP status codes using request filters
+* Thoroughly test and document REST APIs using Postman suites
+* Integrate Frontend clients seamlessly with backend services
+* Follow industry-standard coding conventions and version control best practices
 
 ---
 
@@ -125,57 +143,53 @@ By completing this course, I will be able to:
 git clone https://github.com/Swayam26-rwt/-Full-Stack-Experiments.git
 ```
 
-### Navigate to an Experiment
+### Running Experiment 5 (Spring Boot + React)
 
+#### 1. Backend (Spring Boot)
 ```bash
-cd "-Full-Stack-Experiments/Experiment 2"
+cd "-Full-Stack-Experiments/Experiment 5/backend"
+mvn spring-boot:run
 ```
+Runs on: `http://localhost:8080`
 
-### Install Dependencies
-
+#### 2. Frontend (React + Vite)
 ```bash
+cd "-Full-Stack-Experiments/Experiment 5/frontend"
 npm install
-```
-
-### Start Development Server
-
-```bash
 npm run dev
 ```
+Runs on: `http://localhost:5173`
+
+#### 3. Postman Test Collection
+Import `Experiment 5/postman/collections/Experiment_5_Banking_API.postman_collection.json` into Postman to execute all 12 verified test requests.
 
 ---
 
 ## 📖 Course Information
 
-**University:** Chandigarh University
-
-**Course Code:** 24CSP-337
-
-**Course Name:** Full Stack Development - II
-
-**Semester:** 5th Semester
+**University:** Chandigarh University  
+**Course Code:** 24CSP-337  
+**Course Name:** Full Stack Development - II  
+**Semester:** 5th Semester  
 
 ---
 
 ## 👨‍🎓 Student Information
 
-**Name:** Swayam Rawat
-
-**Department:** Computer Science Engineering
-
-**Specialization:** Artificial Intelligence & Machine Learning (AIML)
-
-**GitHub:** [github.com/Swayam26-rwt](https://github.com/Swayam26-rwt)
+**Name:** Swayam Rawat  
+**Department:** Computer Science Engineering  
+**Specialization:** Artificial Intelligence & Machine Learning (AIML)  
+**GitHub:** [github.com/Swayam26-rwt](https://github.com/Swayam26-rwt)  
 
 ---
 
 ## 📌 Repository Guidelines
 
 * Each experiment is stored in a separate folder.
-* Maintain clean and readable code.
+* Maintain clean and readable code with layered architecture.
 * Follow proper naming conventions.
 * Add meaningful commit messages.
-* Keep documentation updated.
+* Keep documentation updated with visual verification evidence.
 * Push changes after completing each experiment.
 
 ---

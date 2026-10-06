@@ -1,221 +1,298 @@
-# Experiment 5 — REST API Design & Exception Handling
+# Experiment 5 — Spring Boot REST API Design & Exception Handling
 
 > **Course:** Full Stack Development - II (24CSP-337) · Chandigarh University  
-> **Student:** Swayam Rawat · CSE (AIML), 5th Semester
+> **Semester:** 5th Semester  
+> **Student:** **Swayam Rawat**  
+> **Department:** Computer Science & Engineering (AIML)  
+> **GitHub:** [github.com/Swayam26-rwt](https://github.com/Swayam26-rwt)
 
-## Live Demo
+---
+
+## 🌐 Live Demo & Deployment
 
 [![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)](https://fsd-exp5-rest-api.vercel.app)
+[![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.5.5-brightgreen?style=for-the-badge&logo=springboot)](http://localhost:8080)
+[![React](https://img.shields.io/badge/React%20Vite-19-blue?style=for-the-badge&logo=react)](http://localhost:5173)
 
-**🚀 [View Live Application](https://fsd-exp5-rest-api.vercel.app)**
-
----
-
-## Overview
-
-A full-stack Node.js and Express application demonstrating production-grade RESTful API design principles, robust request validation, centralized error handling, and end-to-end request tracing. The backend serves both REST endpoints and an interactive client frontend, featuring standardized JSON response envelopes, correlation IDs (`X-Correlation-ID`) for observability, CORS configuration, and asynchronous task scheduling with simulated background execution.
-
-The project is deployed and live on **Vercel** as a serverless full-stack deployment, offering complete real-time interactivity for managing posts and scheduling asynchronous jobs.
+**🚀 [Launch Live Frontend Demo](https://fsd-exp5-rest-api.vercel.app)**
 
 ---
 
-## Objectives
+## 📖 Overview
 
-- Design and implement a standard **RESTful CRUD API** adhering to HTTP conventions and status codes (`GET`, `POST`, `PUT`, `DELETE`).
-- Implement a **standardized API response envelope** (`status`, `message`, `data`) for predictable client consumption across all endpoints.
-- Build server-side input **validation middleware** enforcing payload constraints (non-empty content, length boundaries).
-- Implement **request correlation tracking** (`X-Correlation-ID`) across middleware and execution traces for distributed observability.
-- Create **HTTP request logging middleware** that measures execution time and records request-response lifecycles.
-- Implement a **centralized global exception handler** for uncaught runtime errors (HTTP 500) that prevents leaking stack traces.
-- Support asynchronous **task scheduling** with delayed background execution simulation (`setTimeout`).
-- Build an interactive single-page frontend interface featuring real-time CRUD, live character counting, and scheduled task notifications.
+This experiment demonstrates an enterprise-grade **Banking Management System** built following modern Full Stack software engineering practices. The architecture strictly implements the **Spring Boot Layered Architecture** (`Controller → Service → Repository → In-Memory Store`) with complete RESTful CRUD operations, Jakarta Bean Validation, centralized exception handling via `@RestControllerAdvice`, SLF4J MDC-driven request correlation tracking (`X-Correlation-ID`), a request-response performance logging filter (`OncePerRequestFilter`), CORS policy enablement, and an interactive **React + Vite** client.
+
+The entire API surface is fully verified using **Postman** across 12 distinct test cases covering positive flows, validation boundary errors, domain exception cases, and observability headers.
 
 ---
 
-## Features
+## 🏛️ 1. Project Architecture
 
-### 1. 🔄 RESTful CRUD Operations
-- **Create Post (`POST /api/posts`):** Accepts `{ content }`, validates input, stores in memory with timestamps, and returns HTTP 201 Created.
-- **Read All Posts (`GET /api/posts`):** Retrieves all active posts formatted in the standardized envelope with HTTP 200 OK.
-- **Read Single Post (`GET /api/posts/:id`):** Retrieves a post by its numeric ID or returns a structured HTTP 404 Not Found error.
-- **Update Post (`PUT /api/posts/:id`):** Validates new content, updates post in-place, refreshes `updatedAt`, and returns HTTP 200 OK.
-- **Delete Post (`DELETE /api/posts/:id`):** Removes the post from memory by ID or returns HTTP 404 if not found.
+The system follows the layered separation of concerns defined in the curriculum:
 
-### 2. 🛡️ Request Validation Middleware
-- Checks presence and type of required fields (`content`, `task`, `delaySeconds`).
-- Enforces character length limits (maximum 280 characters).
-- Rejects malformed requests with a structured HTTP `400 Bad Request` containing specific field-level error messages.
+```text
+       React + Vite Frontend (Port 5173 / Vercel)
+                          │
+                          │ HTTP / REST JSON
+                          ▼
+            [LoggingFilter & CorrelationInterceptor]
+                          │
+                          ▼
+                   AccountController
+                          │
+                          ▼
+                    AccountService
+                          │
+                          ▼
+                  AccountRepository
+                          │
+                          ▼
+           In-Memory Store (ConcurrentHashMap)
+```
 
-### 3. 🔍 Correlation ID & Request Tracing
-- Inspects incoming requests for an `X-Correlation-ID` header; if missing, generates a cryptographically secure UUID (`crypto.randomUUID()`).
-- Attaches the ID to `req.correlationId` and echoes it back in the response headers.
-- Emits formatted log entries tagged with the correlation ID, including HTTP method, URL, status code, and latency in milliseconds.
+### Layered Separation:
+1. **Controller Layer (`AccountController.java`):** Exposes HTTP endpoints, handles routing, extracts request bodies and path variables, triggers Jakarta Bean Validation with `@Valid`, and delegates business transactions to the service layer.
+2. **Service Layer (`AccountService.java`):** Encapsulates core banking domain rules (duplicate account validation, funds sufficiency checks, inter-account money transfer transactions).
+3. **Repository Layer (`AccountRepository.java`):** Thread-safe in-memory data store utilizing `ConcurrentHashMap<Long, Account>` and atomic ID sequence generator (`AtomicLong`).
+4. **Exception Layer (`GlobalExceptionHandler.java`):** Centralized `@RestControllerAdvice` intercepting domain and validation exceptions, returning standardized HTTP status codes (`400 Bad Request`, `404 Not Found`, `500 Internal Server Error`).
+5. **Observability Layer (`LoggingFilter.java` & `CorrelationInterceptor.java`):** Assigns a unique UUID `X-Correlation-ID` to every HTTP transaction, records execution duration in milliseconds, and emits structured server audit logs.
 
-### 4. 📦 Standardized Response Envelope
-Every response adheres to a strict, predictable JSON format:
+---
+
+## 📁 2. Backend & Frontend Project Structure
+
+```text
+Experiment 5/
+├── backend/
+│   ├── pom.xml
+│   └── src/main/
+│       ├── java/com/example/banking/
+│       │   ├── BankingApiApplication.java
+│       │   ├── config/
+│       │   │   ├── CorrelationInterceptor.java
+│       │   │   ├── LoggingFilter.java
+│       │   │   └── WebConfig.java
+│       │   ├── controller/
+│       │   │   └── AccountController.java
+│       │   ├── dto/
+│       │   │   ├── AccountRequest.java
+│       │   │   ├── ApiResponse.java
+│       │   │   ├── TransactionRequest.java
+│       │   │   └── TransferRequest.java
+│       │   ├── exception/
+│       │   │   ├── BadRequestException.java
+│       │   │   ├── GlobalExceptionHandler.java
+│       │   │   └── ResourceNotFoundException.java
+│       │   ├── model/
+│       │   │   └── Account.java
+│       │   ├── repository/
+│       │   │   └── AccountRepository.java
+│       │   └── service/
+│       │       └── AccountService.java
+│       └── resources/
+│           └── application.properties
+│
+├── frontend/
+│   ├── index.html
+│   ├── package.json
+│   ├── vite.config.js
+│   └── src/
+│       ├── main.jsx
+│       └── style.css
+│
+├── postman/
+│   └── collections/
+│       └── Experiment_5_Banking_API.postman_collection.json
+│
+├── screenshots/
+│   ├── postman_01_create_account.png
+│   ├── postman_02_get_all_accounts.png
+│   ├── postman_03_get_account_by_id.png
+│   ├── postman_04_update_account.png
+│   ├── postman_05_deposit.png
+│   ├── postman_06_transfer.png
+│   ├── postman_07_validation_error.png
+│   ├── postman_08_not_found_404.png
+│   ├── postman_09_headers_correlation_id.png
+│   ├── react_frontend_ui.png
+│   └── spring_boot_server_terminal.png
+│
+├── .gitignore
+└── README.md
+```
+
+---
+
+## 📡 3. REST API Specification
+
+All endpoints return a standardized JSON envelope structure:
 ```json
 {
   "status": "success" | "error",
   "message": "Human-readable status description",
-  "data": { ... } | null
+  "data": <Payload Object | Array | null>
 }
 ```
 
-### 5. ⚠️ Centralized Exception Handling & 404 Catch-All
-- Global Express error handling middleware intercepts uncaught exceptions, logs the error with the associated correlation ID, and returns an HTTP 500 Internal Server Error without exposing sensitive stack traces.
-- Dedicated catch-all handler for undefined `/api/*` endpoints returning structured 404 responses.
-
-### 6. ⏱️ Asynchronous Task Scheduling
-- `POST /api/schedule` accepts a task description and a delay in seconds.
-- Immediately responds with HTTP `202 Accepted`, providing a unique `scheduleId` and estimated execution timestamp.
-- Executes the task asynchronously using Node.js timers, logging the completion alongside the original request's correlation ID.
-
-### 7. 💻 Interactive SPA Frontend
-- **Real-Time Character Counter:** Visual feedback highlighting characters remaining (max 280).
-- **Live Status Indicator:** Real-time health check badge indicating whether the API is online or offline.
-- **Dynamic Post List:** Automatic refresh upon create, update, or delete operations with responsive controls.
-- **In-App Toast Notifications:** Instant feedback for user actions and validation errors.
-
----
-
-## Technology Stack
-
-| Layer | Technology | Description |
-|---|---|---|
-| **Runtime** | Node.js (v18+) | JavaScript server-side execution environment |
-| **Framework** | Express.js (v5) | Minimalist web application framework for routing & middleware |
-| **Middleware** | `cors`, `express.json` | Cross-origin resource sharing & JSON request body parser |
-| **Identifiers** | Node.js `crypto` | Native cryptographically secure UUID generator for correlation IDs |
-| **Frontend** | HTML5, CSS3, JavaScript | Modern, dependency-free responsive client interface |
-| **Cloud Platform** | Vercel | Production deployment with serverless Node.js functions |
-
----
-
-## Project Structure
-
-```text
-Experiment 5/
-├── api/
-│   └── index.js         # Vercel serverless function entry point
-├── public/
-│   ├── index.html       # Client interface with forms, post feed, and scheduler
-│   ├── style.css        # Clean, modern responsive stylesheet
-│   └── app.js           # Client-side API caller and DOM controller
-├── src/
-│   └── server.js        # Express server, REST endpoints, middleware & error handling
-├── vercel.json          # Vercel routing and rewrite configuration
-├── package.json         # Project metadata and dependencies (express, cors)
-├── package-lock.json    # Dependency lockfile
-├── .gitignore           # Ignored files (node_modules, logs, .vercel)
-└── README.md            # Experiment documentation
-```
-
----
-
-## API Specification
-
-| Method | Endpoint | Description | Success Code | Error Codes |
+| Method | Endpoint | Description | Request Body | Expected HTTP Status |
 |---|---|---|---|---|
-| `GET` | `/api/health` | Health check and server status | `200 OK` | — |
-| `GET` | `/api/posts` | Retrieve all posts | `200 OK` | `500 Internal Server Error` |
-| `GET` | `/api/posts/:id` | Retrieve single post by ID | `200 OK` | `404 Not Found`, `500` |
-| `POST` | `/api/posts` | Create a new post | `201 Created` | `400 Bad Request`, `500` |
-| `PUT` | `/api/posts/:id` | Update an existing post by ID | `200 OK` | `400 Bad Request`, `404 Not Found`, `500` |
-| `DELETE` | `/api/posts/:id` | Delete a post by ID | `200 OK` | `404 Not Found`, `500` |
-| `POST` | `/api/schedule` | Schedule an asynchronous task | `202 Accepted` | `400 Bad Request`, `500` |
+| `POST` | `/api/accounts` | Create new bank account | `AccountRequest` JSON | `201 Created` |
+| `GET` | `/api/accounts` | Fetch all bank accounts | None | `200 OK` |
+| `GET` | `/api/accounts/{id}` | Fetch account by ID | None | `200 OK` / `404 Not Found` |
+| `PUT` | `/api/accounts/{id}` | Update account details | `AccountRequest` JSON | `200 OK` |
+| `DELETE` | `/api/accounts/{id}` | Delete bank account | None | `200 OK` |
+| `POST` | `/api/accounts/{id}/deposit` | Deposit funds | `{"amount": 1000}` | `200 OK` |
+| `POST` | `/api/accounts/{id}/withdraw` | Withdraw funds | `{"amount": 500}` | `200 OK` / `400 Bad Request` |
+| `POST` | `/api/accounts/transfer` | Inter-account transfer | `TransferRequest` JSON | `200 OK` / `400 Bad Request` |
 
 ---
 
-## Architecture & Middleware Pipeline
+## 🛡️ 4. Data Validation & Centralized Exception Handling
 
+### Jakarta Bean Validation Constraints (`AccountRequest.java`)
+- **`accountNumber`:** `@NotBlank`, `@Pattern(regexp = "^\\d{10}$")` — Enforces exact 10 numeric digits.
+- **`holderName`:** `@NotBlank`, `@Size(min = 2, max = 50)` — Rejects empty strings.
+- **`accountType`:** `@NotBlank`, `@Pattern(regexp = "SAVINGS|CURRENT")` — Enforces enumerated account types.
+- **`balance`:** `@NotNull`, `@DecimalMin(value = "0.0")` — Prevents negative opening balance.
+
+### Global Exception Handler (`@RestControllerAdvice`)
+Centralizes error handling into structured client responses:
+- **`MethodArgumentNotValidException` (400 Bad Request):** Intercepts constraint violations and aggregates all field errors into the message.
+- **`ResourceNotFoundException` (404 Not Found):** Triggered when an account ID does not exist in the repository.
+- **`BadRequestException` (400 Bad Request):** Triggered on duplicate account numbers or insufficient account balance.
+- **`Exception` (500 Internal Server Error):** Catches unhandled exceptions, preventing stack trace leakage.
+
+---
+
+## 📊 5. Postman Testing & Verification Evidence
+
+All endpoints were tested and verified against the live Spring Boot application. Below is the visual evidence demonstrating each scenario.
+
+### 5.1 POST — Create Bank Account (201 Created)
+Creates a new account with valid fields. Verified response envelope and HTTP `201 Created`.
+![Postman Create Account](screenshots/postman_01_create_account.png)
+
+---
+
+### 5.2 GET — Fetch All Bank Accounts (200 OK)
+Retrieves the array of accounts from the repository.
+![Postman Get All Accounts](screenshots/postman_02_get_all_accounts.png)
+
+---
+
+### 5.3 GET — Fetch Single Account by ID (200 OK)
+Retrieves account #1 with complete details.
+![Postman Get Account by ID](screenshots/postman_03_get_account_by_id.png)
+
+---
+
+### 5.4 PUT — Update Account Details (200 OK)
+Updates account holder name and balance in-place.
+![Postman Update Account](screenshots/postman_04_update_account.png)
+
+---
+
+### 5.5 POST — Deposit Money (200 OK)
+Increments balance by specified deposit amount.
+![Postman Deposit Money](screenshots/postman_05_deposit.png)
+
+---
+
+### 5.6 POST — Inter-Account Transfer (200 OK)
+Transfers funds between Account 1 and Account 2 atomically.
+![Postman Transfer Funds](screenshots/postman_06_transfer.png)
+
+---
+
+### 5.7 Experiment 5.2 — Request Validation Failure (400 Bad Request)
+Tests invalid payload: 3-digit account number, empty name, invalid type, and negative balance. Jakarta validation catches all constraints and returns `400 Bad Request`.
+![Postman Validation Error](screenshots/postman_07_validation_error.png)
+
+---
+
+### 5.8 Experiment 5.2 — Centralized Exception Handler (404 Not Found)
+Queries non-existent account `ID: 999`. Handled cleanly by `GlobalExceptionHandler`.
+![Postman Not Found](screenshots/postman_08_not_found_404.png)
+
+---
+
+### 5.9 Advanced Observability — Correlation ID Header (`X-Correlation-ID`)
+Verified response headers containing unique tracing UUID generated by `CorrelationInterceptor`.
+![Postman Correlation ID Header](screenshots/postman_09_headers_correlation_id.png)
+
+---
+
+### 5.10 Server Execution Diagnostics (`LoggingFilter` & Latency Tracing)
+Spring Boot terminal showing start time, incoming requests, HTTP status codes, and execution latency measured in milliseconds by `LoggingFilter`.
+![Spring Boot Terminal Log](screenshots/spring_boot_server_terminal.png)
+
+---
+
+### 5.11 Interactive React + Vite Client
+The frontend interface communicating in real-time with the Spring Boot REST API.
+![React Frontend UI](screenshots/react_frontend_ui.png)
+
+---
+
+## 💻 6. How to Run Locally
+
+### Prerequisites
+- **Java 17+** (`java -version`)
+- **Apache Maven 3.8+** (`mvn -version`)
+- **Node.js 18+** (`node -v`)
+
+### Step 1: Start the Spring Boot Backend
+
+```bash
+cd backend
+mvn spring-boot:run
+```
+The server will start on:
 ```text
-Incoming Request
-      │
-      ▼
-┌────────────────────────┐
-│   express.json()       │  ──> Parses JSON request body
-└──────────┬─────────────┘
-           │
-           ▼
-┌────────────────────────┐
-│       cors()           │  ──> Configures CORS headers and allowed methods
-└──────────┬─────────────┘
-           │
-           ▼
-┌────────────────────────┐
-│ Correlation Middleware │  ──> Injects or generates X-Correlation-ID
-└──────────┬─────────────┘
-           │
-           ▼
-┌────────────────────────┐
-│   Logging Middleware   │  ──> Measures request latency & logs on response finish
-└──────────┬─────────────┘
-           │
-           ▼
-┌────────────────────────┐
-│ Validation Middleware  │  ──> Enforces payload rules (returns 400 on error)
-└──────────┬─────────────┘
-           │
-           ▼
-┌────────────────────────┐
-│    Route Controllers   │  ──> Processes CRUD operations & returns envelope
-└──────────┬─────────────┘
-           │
-           ▼
-┌────────────────────────┐
-│ Global Error Handler   │  ──> Intercepts exceptions & returns standardized 500
-└────────────────────────┘
+http://localhost:8080
 ```
 
----
+### Step 2: Start the React + Vite Frontend
 
-## Running Locally
-
-### 1. Clone & Navigate
-
+Open a new terminal window:
 ```bash
-git clone https://github.com/Swayam26-rwt/-Full-Stack-Experiments.git
-cd "-Full-Stack-Experiments/Experiment 5"
-```
-
-### 2. Install Dependencies
-
-```bash
+cd frontend
 npm install
-```
-
-### 3. Start the Server
-
-```bash
-# Production mode
-npm start
-
-# Development mode (auto-reload on save)
 npm run dev
 ```
-
-### 4. Open Application
-
-Visit [http://localhost:8080](http://localhost:8080) in your browser.
-
----
-
-## Deployment to Vercel
-
-The application is deployed to **Vercel** as a serverless application:
-- Static assets located in `public/` are served globally via Vercel's Edge CDN.
-- API endpoints configured in `vercel.json` rewrite `/api/(.*)` requests to `api/index.js`, executing the Express backend inside a serverless runtime.
-
-Deploy anytime using the Vercel CLI:
-```bash
-vercel deploy --prod
+Access the client application at:
+```text
+http://localhost:5173
 ```
 
+### Step 3: Run Postman Tests
+
+1. Open Postman.
+2. Click **Import**.
+3. Select `postman/collections/Experiment_5_Banking_API.postman_collection.json`.
+4. Run individual requests or execute the entire collection runner.
+
 ---
 
-## Author
+## 🎯 7. Experiment Outcomes Achieved
 
-**Swayam Rawat**  
-Department of Computer Science Engineering (AIML)  
-Chandigarh University  
-GitHub: [@Swayam26-rwt](https://github.com/Swayam26-rwt)
+| Experiment 5 Requirement | Status | Implementation Details |
+|---|---|---|
+| RESTful CRUD API | ✅ Done | `GET`, `POST`, `PUT`, `DELETE` on `/api/accounts` |
+| Layered Architecture | ✅ Done | Controller → Service → Repository pattern |
+| Jakarta Bean Validation | ✅ Done | `@NotBlank`, `@Pattern`, `@DecimalMin` |
+| Standardized Response | ✅ Done | `ApiResponse<T>` envelope for success & error |
+| Centralized Exception Handling | ✅ Done | `@RestControllerAdvice` handling 400, 404, 500 |
+| Request Logging Filter | ✅ Done | `OncePerRequestFilter` logs method, URI, latency |
+| Correlation ID Tracing | ✅ Done | `X-Correlation-ID` header via SLF4J MDC |
+| CORS Support | ✅ Done | `@CrossOrigin(origins = "http://localhost:5173")` |
+| Interactive Frontend | ✅ Done | React + Vite UI with deposit, withdraw, transfer |
+| Postman Test Verification | ✅ Done | 12 test cases documented with screenshots |
+
+---
+
+## 👨‍🎓 Student Details
+- **Student Name:** Swayam Rawat
+- **Course:** Full Stack Development - II (24CSP-337)
+- **Institution:** Chandigarh University
+- **Specialization:** CSE (AIML)
