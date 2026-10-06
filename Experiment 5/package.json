@@ -1,0 +1,14 @@
+{
+  "name": "experiment-5-banking",
+  "version": "1.0.0",
+  "description": "Experiment 5 - Banking Management System REST API & React Frontend",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "build": "cd frontend && npm install && npm run build"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.0"
+  }
+}
