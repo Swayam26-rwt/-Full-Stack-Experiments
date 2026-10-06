@@ -1,13 +1,15 @@
 ---
 
-# 🚀 Full Stack Development - II (FSD-II)
+# 🚀 Full Stack Development – II (FSD-II)
 
 > **Chandigarh University**  
-> **Course:** Full Stack Development - II (24CSP-337)  
+> **Course:** Full Stack Development – II (24CSP-337)  
 > **Semester:** 5th Semester  
 > **Student:** **Swayam Rawat**  
 > **Department:** Computer Science Engineering (AIML)  
 > **GitHub:** [github.com/Swayam26-rwt](https://github.com/Swayam26-rwt)
+
+---
 
 ---
 
