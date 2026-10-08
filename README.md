@@ -85,6 +85,11 @@ Each experiment is maintained in its own folder for better organization and vers
 │   ├── frontend/    — React + Vite Banking Management System UI
 │   ├── postman/     — Postman Collection (12 Verified Endpoints)
 │   └── screenshots/ — Complete visual verification evidence (Postman + Terminal + UI)
+├── Experiment 6/    — Scalable Read APIs & Query Optimization (Express.js + SQLite + JMeter)
+│   ├── data/        — SQLite database storage with auto-seeding
+│   ├── jmeter/      — Apache JMeter load testing test plans (.jmx)
+│   ├── public/      — Web client / API overview interface
+│   └── src/         — Express API implementation (Pagination, Sorting, Cache, JOINs, Native SQL)
 │
 └── README.md
 ```
@@ -100,7 +105,7 @@ Each experiment is maintained in its own folder for better organization and vers
 | Experiment 3 | Authentication & RBAC | Role-based access control with JWT, Axios interceptors, and protected React Router routes | [🚀 Live Demo](https://fsd-exp3-rbac-jwt.vercel.app) | ✅ |
 | Experiment 4 | React Optimization & Testing | Interactive calendar with React.memo/useMemo/useCallback, MSW mock API, and Vitest test suite | [🚀 Live Demo](https://fsd-exp4-calendar.vercel.app) | ✅ |
 | Experiment 5 | Spring Boot REST API & Exception Handling | Enterprise Banking REST API with Spring Boot layered architecture (Controller-Service-Repository), Jakarta Bean Validation, centralized `@RestControllerAdvice`, `OncePerRequestFilter` logging, `X-Correlation-ID` tracing, Postman test suite, and React + Vite frontend | [🚀 Live Demo](https://fsd-exp5-rest-api.vercel.app) | ✅ |
-| Experiment 6 | Backend Integration | — | — | ⏳ |
+| Experiment 6 | Scalable Read APIs & Optimization | High-performance read APIs with pagination, multi-field sorting, in-memory caching (TTL), N+1 query elimination (JOINs), native SQL, and JMeter benchmarking | — | ✅ |
 | Experiment 7 | REST APIs | — | — | ⏳ |
 | Experiment 8 | Authentication & Security | — | — | ⏳ |
 | Experiment 9 | Performance Optimization | — | — | ⏳ |
@@ -164,6 +169,19 @@ Runs on: `http://localhost:5173`
 
 #### 3. Postman Test Collection
 Import `Experiment 5/postman/collections/Experiment_5_Banking_API.postman_collection.json` into Postman to execute all 12 verified test requests.
+
+### Running Experiment 6 (Scalable Read APIs & JMeter)
+
+#### 1. Backend Server (Express + SQLite)
+```bash
+cd "-Full-Stack-Experiments/Experiment 6"
+npm install
+npm run dev
+```
+Runs on: `http://localhost:3000`
+
+#### 2. Apache JMeter Benchmarking
+Open `Experiment 6/jmeter/experiment-6.jmx` in Apache JMeter to execute concurrent thread load tests measuring latency and throughput.
 
 ---
 
