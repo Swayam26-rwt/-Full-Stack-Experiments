@@ -1,0 +1,236 @@
+{
+  "info": {
+    "_postman_id": "b6a78912-34ef-4791-bc10-exp6readapi01",
+    "name": "Experiment 6 - Scalable Read APIs & Optimization",
+    "description": "Comprehensive Postman test collection for Chandigarh University FSD-II (24CSP-337) Experiment 6.\nCovers pagination, multi-column sorting, in-memory caching with TTL, N+1 query elimination via SQL JOINs, native SQL top queries, and cache invalidation.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "1. Pagination & Sorting",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200 OK\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "",
+              "pm.test(\"Response contains pagination metadata and posts array\", function () {",
+              "    var jsonData = pm.response.json();",
+              "    pm.expect(jsonData).to.have.property(\"page\");",
+              "    pm.expect(jsonData).to.have.property(\"size\");",
+              "    pm.expect(jsonData).to.have.property(\"total\");",
+              "    pm.expect(jsonData.posts).to.be.an(\"array\");",
+              "    pm.expect(jsonData.posts.length).to.be.at.most(5);",
+              "});",
+              "",
+              "pm.test(\"Posts are sorted by likes in descending order\", function () {",
+              "    var jsonData = pm.response.json();",
+              "    for (var i = 0; i < jsonData.posts.length - 1; i++) {",
+              "        pm.expect(jsonData.posts[i].likes).to.be.at.least(jsonData.posts[i + 1].likes);",
+              "    }",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/posts?page=0&size=5&sort=likes&order=desc",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "posts"],
+          "query": [
+            { "key": "page", "value": "0" },
+            { "key": "size", "value": "5" },
+            { "key": "sort", "value": "likes" },
+            { "key": "order", "value": "desc" }
+          ]
+        },
+        "description": "Fetches paginated posts sorted by likes in descending order using SQLite B-Tree index."
+      },
+      "response": []
+    },
+    {
+      "name": "2. In-Memory Cache (Miss - Database Query)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200 OK\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "",
+              "pm.test(\"Response indicates database origin or active cache\", function () {",
+              "    var jsonData = pm.response.json();",
+              "    pm.expect(jsonData).to.have.property(\"source\");",
+              "    pm.expect(jsonData.posts).to.be.an(\"array\");",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/posts/cached",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "posts", "cached"]
+        },
+        "description": "First call queries the database on cache miss and stores results in memory with a 300s TTL."
+      },
+      "response": []
+    },
+    {
+      "name": "3. In-Memory Cache (Hit - node-cache RAM)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200 OK\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "",
+              "pm.test(\"Source is cache on subsequent hit\", function () {",
+              "    var jsonData = pm.response.json();",
+              "    pm.expect(jsonData.source).to.eql(\"cache\");",
+              "    pm.expect(jsonData.posts.length).to.be.greaterThan(0);",
+              "});",
+              "",
+              "pm.test(\"Response time is ultra-fast (< 50ms)\", function () {",
+              "    pm.expect(pm.response.responseTime).to.be.below(50);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/posts/cached",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "posts", "cached"]
+        },
+        "description": "Subsequent calls serve directly from NodeCache memory in sub-millisecond time."
+      },
+      "response": []
+    },
+    {
+      "name": "4. Optimized JOIN (Eliminates N+1 Queries)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200 OK\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "",
+              "pm.test(\"Returns posts joined with comments in a single query\", function () {",
+              "    var jsonData = pm.response.json();",
+              "    pm.expect(jsonData).to.be.an(\"array\");",
+              "    pm.expect(jsonData.length).to.be.greaterThan(0);",
+              "    pm.expect(jsonData[0]).to.have.property(\"title\");",
+              "    pm.expect(jsonData[0]).to.have.property(\"comment\");",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/posts/with-comments",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "posts", "with-comments"]
+        },
+        "description": "Executes single SQL LEFT JOIN between posts and comments, eliminating the 1+N roundtrip problem."
+      },
+      "response": []
+    },
+    {
+      "name": "5. Native SQL Top Posts",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200 OK\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "",
+              "pm.test(\"Returns top 3 posts by likes\", function () {",
+              "    var jsonData = pm.response.json();",
+              "    pm.expect(jsonData).to.be.an(\"array\");",
+              "    pm.expect(jsonData.length).to.be.at.most(3);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/posts/top",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "posts", "top"]
+        },
+        "description": "Executes raw SQL: SELECT id, title, author, likes FROM posts ORDER BY likes DESC LIMIT 3;"
+      },
+      "response": []
+    },
+    {
+      "name": "6. Cache Eviction (DELETE /api/cache)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200 OK\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "",
+              "pm.test(\"Cache cleared confirmation message\", function () {",
+              "    var jsonData = pm.response.json();",
+              "    pm.expect(jsonData.message).to.eql(\"Cache cleared\");",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/cache",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "cache"]
+        },
+        "description": "Flushes the in-memory cache."
+      },
+      "response": []
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000",
+      "type": "string"
+    }
+  ]
+}

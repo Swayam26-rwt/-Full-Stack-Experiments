@@ -1,9 +1,12 @@
 {
-  "name": "experiment-6-simple",
+  "name": "experiment-6-scalable-read-apis",
   "version": "1.0.0",
+  "description": "Experiment 6 - Scalable Read APIs with Pagination, Caching, and JMeter Benchmarking",
+  "main": "src/server.js",
   "scripts": {
     "start": "node src/server.js",
-    "dev": "nodemon src/server.js"
+    "dev": "nodemon src/server.js",
+    "build": "cd frontend && npm install && npm run build"
   },
   "dependencies": {
     "better-sqlite3": "^12.4.1",

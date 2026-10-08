@@ -85,11 +85,16 @@ Each experiment is maintained in its own folder for better organization and vers
 │   ├── frontend/    — React + Vite Banking Management System UI
 │   ├── postman/     — Postman Collection (12 Verified Endpoints)
 │   └── screenshots/ — Complete visual verification evidence (Postman + Terminal + UI)
-├── Experiment 6/    — Scalable Read APIs & Query Optimization (Express.js + SQLite + JMeter)
+├── Experiment 6/    — Scalable Read APIs & Query Optimization (Express.js + React Vite + SQLite + JMeter)
+│   ├── api/         — Vercel serverless entrypoint
 │   ├── data/        — SQLite database storage with auto-seeding
+│   ├── frontend/    — React + Vite glassmorphic interactive dashboard (6 tabs)
 │   ├── jmeter/      — Apache JMeter load testing test plans (.jmx)
-│   ├── public/      — Web client / API overview interface
-│   └── src/         — Express API implementation (Pagination, Sorting, Cache, JOINs, Native SQL)
+│   ├── postman/     — Postman Collection (7 Automated Test Endpoints)
+│   ├── screenshots/ — Complete visual verification evidence (Postman + JMeter + UI)
+│   ├── public/      — Web client / compiled production assets
+│   ├── src/         — Express API implementation (Pagination, Sorting, Cache, JOINs, Native SQL)
+│   └── vercel.json  — Cloud deployment configuration
 │
 └── README.md
 ```
@@ -105,7 +110,7 @@ Each experiment is maintained in its own folder for better organization and vers
 | Experiment 3 | Authentication & RBAC | Role-based access control with JWT, Axios interceptors, and protected React Router routes | [🚀 Live Demo](https://fsd-exp3-rbac-jwt.vercel.app) | ✅ |
 | Experiment 4 | React Optimization & Testing | Interactive calendar with React.memo/useMemo/useCallback, MSW mock API, and Vitest test suite | [🚀 Live Demo](https://fsd-exp4-calendar.vercel.app) | ✅ |
 | Experiment 5 | Spring Boot REST API & Exception Handling | Enterprise Banking REST API with Spring Boot layered architecture (Controller-Service-Repository), Jakarta Bean Validation, centralized `@RestControllerAdvice`, `OncePerRequestFilter` logging, `X-Correlation-ID` tracing, Postman test suite, and React + Vite frontend | [🚀 Live Demo](https://fsd-exp5-rest-api.vercel.app) | ✅ |
-| Experiment 6 | Scalable Read APIs & Optimization | High-performance read APIs with pagination, multi-field sorting, in-memory caching (TTL), N+1 query elimination (JOINs), native SQL, and JMeter benchmarking | — | ✅ |
+| Experiment 6 | Scalable Read APIs & Optimization | High-performance read APIs with pagination, multi-field sorting, in-memory caching (TTL), N+1 query elimination (JOINs), native SQL, and JMeter benchmarking | [🚀 Live Demo](https://fsd-exp6-read-api.vercel.app) | ✅ |
 | Experiment 7 | REST APIs | — | — | ⏳ |
 | Experiment 8 | Authentication & Security | — | — | ⏳ |
 | Experiment 9 | Performance Optimization | — | — | ⏳ |
@@ -122,6 +127,7 @@ All completed laboratory experiments are deployed and accessible via cloud hosti
 * **Experiment 3 (RBAC & Protected Routes):** [https://fsd-exp3-rbac-jwt.vercel.app](https://fsd-exp3-rbac-jwt.vercel.app)
 * **Experiment 4 (Optimized Calendar):** [https://fsd-exp4-calendar.vercel.app](https://fsd-exp4-calendar.vercel.app)
 * **Experiment 5 (Spring Boot Banking REST API + React Vite):** [https://fsd-exp5-rest-api.vercel.app](https://fsd-exp5-rest-api.vercel.app)
+* **Experiment 6 (Scalable Read APIs & Caching):** [https://fsd-exp6-read-api.vercel.app](https://fsd-exp6-read-api.vercel.app)
 
 ---
 
